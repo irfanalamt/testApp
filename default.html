@@ -1,0 +1,41 @@
+<html>
+<head>
+    <title> My title
+    </title>
+    <script type="text/javascript">
+    function youClicked()
+    {
+    var str = document.getElementById("textbox").value;
+    alert(str);
+    
+    }  
+
+    function mouseOverImage()
+    {
+        document.getElementById("img1").src = "images/spideyComic.png";
+    }
+
+    function mouseOutImage()
+    {
+        document.getElementById("img1").src = "images/yaoMing.png";
+    }
+    </script>
+
+</head>
+<body>
+    this is the body or is it?
+    fsdf
+    <button>
+        Click me!
+    </button>
+    <input id="textbox" placeholder="hint">
+    
+    <br>
+    <button onclick="youClicked()" id = "theButton">
+This klone
+    </button>
+    <br>
+    <img id="img1" onmouseover="mouseOverImage()" onmouseout="mouseOutImage()" src="images/leaf.jpg" height="200" width="200">
+</body>
+  
+</html> 
