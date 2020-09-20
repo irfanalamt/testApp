@@ -1,0 +1,31 @@
+#logo {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5%;
+}
+
+.fields {
+   display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 10px 20px;
+    border: 2px black solid;
+ 
+}
+
+button{
+    background-color: cyan;
+    transition-duration: 0.3s;
+}
+
+button:hover {
+    background-color:greenyellow;
+    color: white;
+    cursor: pointer;
+}
+
+
+
