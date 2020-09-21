@@ -1,9 +1,13 @@
+*{
+    font-size: large;
+}
 #logo {
     display: block;
     margin-left: auto;
     margin-right: auto;
     margin-top: 5%;
-}
+    width: 300px;
+  }
 
 .fields {
    display: flex;
@@ -16,16 +20,38 @@
  
 }
 
-button{
+button,.button{
+    margin: 10px 20px;
+    padding: 10px 20px;
     background-color: cyan;
     transition-duration: 0.3s;
 }
 
-button:hover {
+button:hover,.button:hover {
     background-color:greenyellow;
     color: white;
     cursor: pointer;
+} 
+
+.container-1 {
+    padding: 15px 20px;
+    margin: auto;
+    background-color: aliceblue;
+    text-align: center;
 }
 
+.container-1 label{
+    display: block;
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: larger;
+}
 
-
+.container-1 input[type="email"]{
+    padding: 8px 25px;
+    margin-bottom: 10px;
+}
+.container-1 input[type="password"]{
+    padding: 8px 25px;
+    margin-bottom: 10px;
+}
