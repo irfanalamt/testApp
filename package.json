@@ -1,0 +1,19 @@
+{
+  "name": "appx",
+  "version": "1.0.0",
+  "description": "app building",
+  "main": "demo.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/irfanalamt/testApp.git"
+  },
+  "author": "Irfan Alam",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/irfanalamt/testApp/issues"
+  },
+  "homepage": "https://github.com/irfanalamt/testApp#readme"
+}

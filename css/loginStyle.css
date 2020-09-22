@@ -34,6 +34,7 @@ button:hover,.button:hover {
 } 
 
 .container-1 {
+    width: 400px;
     padding: 15px 20px;
     margin: auto;
     background-color: aliceblue;
@@ -47,11 +48,12 @@ button:hover,.button:hover {
     font-size: larger;
 }
 
-.container-1 input[type="email"]{
+.container-1 input[type="email"],.container-1 input[type="password"]{
     padding: 8px 25px;
     margin-bottom: 10px;
 }
-.container-1 input[type="password"]{
-    padding: 8px 25px;
-    margin-bottom: 10px;
+
+.container-1 input[type="email"]:focus,.container-1 input[type="password"]:focus{
+   width: 250px;
+   border-color: cornflowerblue;
 }
