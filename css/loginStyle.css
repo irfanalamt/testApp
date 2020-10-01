@@ -25,6 +25,7 @@ button,.button{
     padding: 10px 20px;
     background-color: cyan;
     transition-duration: 0.3s;
+    border-radius: 4px;
 }
 
 button:hover,.button:hover {

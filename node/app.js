@@ -1,10 +1,5 @@
-var http = require("http");
+const express = require('express');
+const app = express();
+const PORT = process.env.PORT|| 5000;
 
-http.createServer(
-
-    function(req,res)
-    {   res.writeHead(200,{'Content-Type':'text/html'});
-        res.write("Server said HgggI");
-        res.end();
-    }
-).listen(8080)
+app.listen(PORT,()==>console.log(`Server started on port ${PORT}`));
