@@ -4,6 +4,7 @@ const PORT = process.env.PORT|| 5000;
 var path = require("path");
 //const mongoose = require('mongoose');
 const expressLayouts = require('express-ejs-layouts');
+const { urlencoded } = require('express');
 
 //logger
 const logger = (req,res,next)=>{
@@ -14,6 +15,7 @@ app.use(logger);
 
 app.use(expressLayouts);
 app.set('view engine','ejs');
+app.use(express.urlencoded({extended:false}));
 
 //routes
 app.use('/',require('./routes/index'))

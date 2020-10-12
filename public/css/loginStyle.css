@@ -11,7 +11,13 @@
     border: 3px solid #555;
 
   }
-
+#register {
+    text-decoration: none;
+    padding: 10px;
+    display: block;
+    text-align: center;
+    color: blueviolet;
+}
 .fields {
    display: flex;
     margin-left: auto;
