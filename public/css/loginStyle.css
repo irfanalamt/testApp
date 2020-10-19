@@ -58,12 +58,12 @@ button:hover,.button:hover {
     font-size: larger;
 }
 
-.container-1 input[type="email"],.container-1 input[type="password"]{
+.container-1 input{
     padding: 8px 25px;
     margin-bottom: 10px;
 }
 
-.container-1 input[type="email"]:focus,.container-1 input[type="password"]:focus{
+.container-1 input:focus{
    width: 250px;
-   border-color: cornflowerblue;
+   border-color: darkblue;
 }
