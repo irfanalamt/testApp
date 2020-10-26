@@ -1,6 +1,13 @@
 *{
     font-size: large;
 }
+.select1 {
+    width: 280px;
+    height: 40px;
+    border: 1px solid black;
+    font-size: 18px;
+    border-radius: 5px;
+}
 #logo {
     display: block;
     margin-left: auto;
@@ -67,3 +74,4 @@ button:hover,.button:hover {
    width: 250px;
    border-color: darkblue;
 }
+
