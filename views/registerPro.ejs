@@ -1,25 +1,31 @@
-<link rel="stylesheet" href="/css/loginStyle.css">
-<a href="/"><img id="logo" src="/images/logo.JPG" alt="HandyMe logo"></a>
-<div class="container-1">
+<a href="/"><img class="mb-rounded my-3 d-block mx-auto" id="logo" src="/images/logo.JPG" alt="HandyMe logo"></a>
+<div class="container-sm col-4 text-center">
   <%- include('./partials/messages.ejs') %>
-<form method="POST" action="/pro/register">
+<form class="form-signin" method="POST" action="/pro/register">
   <label for="fname">First Name</label>
-<input type="text" name="fname" value="<%= typeof fname != 'undefined' ? fname : '' %>"required><br>
+<input class="form-control" type="text" name="fname" value="<%= typeof fname != 'undefined' ? fname : '' %>"required>
 <label for="lname">Last Name</label>
-<input type="text" name="lname" value="<%= typeof lname != 'undefined' ? lname : '' %>"required><br>
+<input class="form-control" type="text" name="lname" value="<%= typeof lname != 'undefined' ? lname : '' %>"required>
 <label for="email">Email</label>
-<input type="Email" name="email" value="<%= typeof email != 'undefined' ? email : '' %>"required><br>
+<input class="form-control" type="Email" name="email" value="<%= typeof email != 'undefined' ? email : '' %>"required>
 <label for="phone">Phone Number</label>
-<input type="tel" name="phone" value="<%= typeof phone != 'undefined' ? phone : '' %>"><br>
-<label for="primary service">Your primary service:</label>
-<select  name="serviceType" class="select1" required>
-    <option value="plumber">plumber</option>
-    <option value="painter">painter</option>
-    <option value="cleaner">cleaner</option>
-    <option value="electrician">electrician</option>
-    <option value="pestcontrol">pest control</option>
-</select><br>
-<input class="button" type="submit" value="Register">
+<input class="form-control" type="tel" name="phone" value="<%= typeof phone != 'undefined' ? phone : '' %>"><br>
+
+<div class="input-group ">
+  <div class="input-group-prepend mb-4">
+    <label class="input-group-text" for="serviceType">Service Type</label>
+  </div>
+  <select id="serviceType" class="custom-select"  name="serviceType" class="select1" required>
+    <option selected>Select primary service</option
+    <option value="plumber">Plumber</option>
+    <option value="painter">Painter</option>
+    <option value="cleaner">Cleaner</option>
+    <option value="electrician">Electrician</option>
+    <option value="pestcontrol">Pest control</option>
+</select>
+<br>
+<input class="btn btn-lg btn-primary btn-block mb-3" type="submit" value="Register">
 </form>
 </div>
 <a id="register" href="/users/login">Already registered? Login</a>
+
