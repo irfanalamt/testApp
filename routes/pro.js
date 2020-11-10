@@ -5,6 +5,14 @@ const Pro = require('../models/Pro');
 
 
 router.get('/becomePro',(req,res)=>res.render('registerPro'));
+router.get('/loginPro',(req,res)=>res.render('loginPro'));
+
+router.post('/login',(req,res)=>{
+const {password,email} = req.body;
+
+console.log(`${email} ${password}`);
+
+});
 
 router.post('/register',(req,res)=>{
 const {fname,lname,email,phone,serviceType} = req.body;

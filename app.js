@@ -7,8 +7,12 @@ const expressLayouts = require('express-ejs-layouts');
 const flash = require('connect-flash');
 const session = require('express-session');
 const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
 
-require('./passport')(passport);
+//model
+const User = require('./models/User');
+
+//require('./passport')(passport);
 
 //logger
 const logger = (req,res,next)=>{
@@ -33,6 +37,10 @@ app.use(session({
 // Passport
 app.use(passport.initialize());
 app.use(passport.session());
+
+passport.use(User.createStrategy());
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 //flash
 app.use(flash());

@@ -1,3 +1,23 @@
-<h1>Dashboard</h1>
-<p>Welcome <%= name %></p>
-<a href="/users/logout">logout</a>
+<div class="container-fluid" >
+    <div class="row">
+    <img class="col-3 my-3" src="/images/logo.JPG" alt="">
+<h1 class="h1 my-3">Dashboard</h1>
+<p class="display-4  m-3 ">Welcome <%= name %></p>
+<a class="col-1 m-3" href="/users/logout">logout</a>
+</div>
+</div>
+<h3>The Pros in you area</h3>
+<ul class="list-unstyled">
+
+    <%pros.forEach(element => { %>
+        
+ 
+
+    <li>
+<%= element.fname %> <%= element.lname %> 
+<ul >
+    <li class="text-uppercase"><%=  element.serviceType  %></li>
+</ul>
+    </li>
+    <%   });  %> 
+</ul>
