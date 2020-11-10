@@ -3,11 +3,21 @@ const router = express.Router();
 //const bcrypt = require('bcryptjs');
 const passport = require('passport');
 
+const {ensureAuthenticatedUser} = require('./auth');
+//models
 const User = require('../models/User');
+const Pro = require('../models/Pro');
+
+
 
 router.get('/login',(req,res)=>res.render('login'));
 router.get('/register',(req,res)=>res.render('register'));
 
+router.get('/dashboard',ensureAuthenticatedUser,(req,res)=>
+{
+   Pro.find().then((docs)=>res.render('dashboard',{name:req.user.name,pros:docs}));
+   
+});
 
 router.post('/register',(req,res)=>{
     const {name,email,password,password2} = req.body;
@@ -81,7 +91,7 @@ router.post('/register',(req,res)=>{
 // });
 
 router.post('/login', passport.authenticate('local', { failureRedirect: '/users/login', failureFlash: true }), function(req, res) {
-    res.redirect('/dashboard');
+    res.redirect('/users/dashboard');
   });
 
 router.get('/logout',(req,res)=>{

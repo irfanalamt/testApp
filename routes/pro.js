@@ -3,9 +3,12 @@ const router = express.Router();
 
 const Pro = require('../models/Pro');
 
+const {ensureAuthenticatedPro} = require('./auth');
 
 router.get('/becomePro',(req,res)=>res.render('registerPro'));
 router.get('/loginPro',(req,res)=>res.render('loginPro'));
+
+router.get('/dashboard',ensureAuthenticatedPro,(req,res)=>res.render('dashboardPro'));
 
 router.post('/login',(req,res)=>{
 const {password,email} = req.body;
