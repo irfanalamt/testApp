@@ -8,7 +8,7 @@ router.get('/',(req,res)=>res.render('index'));
 
 router.get('/dashboard',ensureAuthenticated,(req,res)=>
 {
-   User.find().then((docs)=>res.render('dashboard',{name:req.user.name,pros:docs}));
+   Pro.find().then((docs)=>res.render('dashboard',{name:req.user.name,pros:docs}));
    
 }
 );
