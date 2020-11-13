@@ -1,4 +1,5 @@
 const express = require('express');
+require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT|| 5000;
 var path = require("path");
@@ -7,7 +8,7 @@ const expressLayouts = require('express-ejs-layouts');
 const flash = require('connect-flash');
 const session = require('express-session');
 const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy;
+const MongoStore = require('connect-mongo')(session);
 
 //model
 const User = require('./models/User');
@@ -29,9 +30,10 @@ app.use(express.urlencoded({extended:false}));
 
 //session
 app.use(session({
-  secret: 'secret',
+  secret: process.env.SECRET,
   resave: true,
-  saveUninitialized: true
+  saveUninitialized: true,
+  store: new MongoStore({ url:process.env.DB_STRING })
 }));
 
 // Passport
