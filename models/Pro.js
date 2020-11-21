@@ -1,33 +1,43 @@
 const mongoose = require('mongoose');
+const passportLocalMongoose = require('passport-local-mongoose');
 
 const proSchema = mongoose.Schema({
-   fname: {
+fname: 
+{
        type: String,
        required : true
-   } ,
-   lname: {
+} ,
+lname: 
+{
     type: String,
     required : true
 } ,
-email: {
+email: 
+{
     type: String,
     required : true
 } ,
- phone: {
+phone: 
+ {
     type: Number,
     required : true
 },
-serviceType: {
+serviceType: 
+{
     type: String,
     required : true
 },
-date: {
+isVerified: 
+{ 
+    type: Boolean, default: false 
+},
+date: 
+{
     type: Date,
     default: Date.now
-  }
+}
 },{ versionKey: false });
 
+proSchema.plugin(passportLocalMongoose,{usernameField:'email',usernameLowerCase:true});
 
-const Pro = mongoose.model('Pro', proSchema);
-
-module.exports = Pro;
+module.exports = mongoose.model('Pro', proSchema);

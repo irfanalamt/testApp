@@ -31,9 +31,12 @@ app.use(express.urlencoded({extended:false}));
 //session
 app.use(session({
   secret: process.env.SECRET,
-  resave: true,
+  resave: false,
   saveUninitialized: true,
-  store: new MongoStore({ url:process.env.DB_STRING })
+  store: new MongoStore({ url:process.env.DB_STRING }),
+  cookie: {
+    maxAge: 1000 * 60 * 60 * 24
+}
 }));
 
 // Passport
@@ -68,8 +71,8 @@ const conn = mongoose.connect('mongodb://localhost/handyme', {
   useUnifiedTopology: true,
   useFindAndModify: false,
   useCreateIndex: true
-}).then(() => console.log('MongoDB Connected'))
+}).then(() => console.log('MongoDB Connection successful.'))
 .catch(err => console.log(err));
 
 
-app.listen(PORT,()=>console.log(`Server started on port ${PORT}`));
+app.listen(PORT,()=>console.log(`Express Server started on port ${PORT}`));

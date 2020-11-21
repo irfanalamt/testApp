@@ -2,7 +2,11 @@ const express = require('express');
 require('dotenv').config()
 const router = express.Router();
 
+//models
+const TokenPro = require('../models/TokenPro');
 const Pro = require('../models/Pro');
+
+var nodemailer = require('nodemailer');
 
 const {ensureAuthenticatedPro} = require('./auth');
 
@@ -37,11 +41,45 @@ Pro.findOne({email:email},(err,pro)=>
             fname,lname,email,phone,serviceType
         });
         newPro.save().then(pro=>{
-        errors.push({msg:'Registration Successful!'});
+            var rand= Math.floor((Math.random() * 100) + 54);
+            var token = new TokenPro({_proId:pro._id,token:rand});
+            token.save((err)=>
+            {
+                if (err) throw err;
+
+               
+                var link="http://"+req.get('host')+"/verify?id="+rand;
+                var smtpTransport = nodemailer.createTransport({
+                    service: "Gmail",
+                    auth: 
+                    {
+                        user: process.env.GMAIL_USER,
+                        pass: process.env.GMAIL_PASS
+                    }
+                });
+                mailOptions=
+                {   host: 'smtp.gmail.com',
+                    to : pro.email,
+                    subject : 'HandyME Email Confirmation',
+                    html : "Hello,<br> Please Click on the link to verify your email.<br><a href="+link+">Click here to verify</a>"
+                }
+                console.log(mailOptions);
+
+                smtpTransport.sendMail(mailOptions,(err,info)=>{
+                    if(err) console.log(err);
+
+                 else{
+                        console.log("Message sent! \n" + JSON.stringify(info));
+                        
+                     }
+                });
+
+            });
+        errors.push({msg:'Confirm email to complete registration.'});
         res.render('registerPro',{errors,fname,lname,email,phone,serviceType});
 
         }).catch(err=>console.log(err));
-        res.redirect('/pro/becomePro');
+        
     }
 });
 
