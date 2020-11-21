@@ -75,8 +75,8 @@ Pro.findOne({email:email},(err,pro)=>
                 });
 
             });
-        errors.push({msg:'Confirm email to complete registration.'});
-        res.render('registerPro',{errors,fname,lname,email,phone,serviceType});
+        req.flash('success_msg','Confirmation email sent to '+pro.email+' .Verify email to complete registration.');
+        res.redirect('/pro/becomePro');
 
         }).catch(err=>console.log(err));
         
