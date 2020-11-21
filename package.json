@@ -19,7 +19,6 @@
   },
   "homepage": "https://github.com/irfanalamt/testApp#readme",
   "dependencies": {
-    "bcryptjs": "^2.4.3",
     "connect-flash": "^0.1.1",
     "connect-mongo": "^3.2.0",
     "dotenv": "^8.2.0",
@@ -31,7 +30,8 @@
     "nodemailer": "^6.4.16",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
-    "passport-local-mongoose": "^6.0.1"
+    "passport-local-mongoose": "^6.0.1",
+    "randombytes": "^2.1.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.4"
