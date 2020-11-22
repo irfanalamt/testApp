@@ -1,6 +1,7 @@
 const express = require('express');
 require('dotenv').config()
 const router = express.Router();
+const passport = require('passport');
 var randomBytes = require('randombytes');
 
 //models
@@ -11,7 +12,41 @@ var nodemailer = require('nodemailer');
 
 const {ensureAuthenticatedPro} = require('./auth');
 
-router.get('/becomePro',(req,res)=>res.render('registerPro'));
+var ensureVerified=(req,res,next)=>
+{
+    let userEmail = req.body.email;
+    Pro.findOne({email:userEmail},(err,doc)=>
+    {
+        if (err) throw err;
+
+        if(!doc){
+            req.flash('error_msg', 'User NOT found');
+            res.redirect('/pro/loginPro');
+        }
+
+        else if (doc.isVerified==true)
+        {
+        console.log('EnsureVerified()==true')
+        next();
+        }
+
+        else{
+
+            req.flash('error_msg', 'Account NOT verified.');
+            res.redirect('/pro/loginPro');
+      
+        }
+
+      
+    });
+}
+
+router.get('/becomePro',(req,res)=>
+{   
+    
+    res.render('registerPro')
+}
+);
 router.get('/loginPro',(req,res)=>res.render('loginPro'));
 
 router.get('/verify',(req,res)=>{
@@ -53,17 +88,22 @@ router.get('/verify',(req,res)=>{
     });
 });
 
-router.get('/dashboard',ensureAuthenticatedPro,(req,res)=>res.render('dashboardPro'));
+router.get('/dashboard',ensureAuthenticatedPro,(req,res)=>res.render('dashboardPro',{name:req.user.name}));
 
-router.post('/login',(req,res)=>{
-const {password,email} = req.body;
-
-console.log(`${email} ${password}`);
-
-});
+router.post('/login',ensureVerified,
+  passport.authenticate('local',
+{ 
+    successRedirect: '/pro/dashboard',
+    failureRedirect: '/pro/loginPro',
+    failureFlash: true 
+})
+);
 
 router.post('/register',(req,res)=>{
 const {fname,lname,email,phone,serviceType} = req.body;
+var tempNum = Math.floor(Math.random() * 10000)+1; 
+var tempPass = 'HMpro'+tempNum;
+console.log(tempPass);
 let errors = [];
 Pro.findOne({email:email},(err,pro)=>
 {
@@ -80,7 +120,7 @@ Pro.findOne({email:email},(err,pro)=>
         const newPro = new Pro({
             fname,lname,email,phone,serviceType
         });
-        newPro.save().then(pro=>{
+        Pro.register(newPro,tempPass).then(pro=>{
             //var rand= Math.floor((Math.random() * 100) + 54);
             var rand = randomBytes(8).toString('hex');
             console.log('rand = '+rand);
@@ -104,7 +144,7 @@ Pro.findOne({email:email},(err,pro)=>
                    // to : pro.email,
                     to: 'irfanalamt@gmail.com',
                     subject : 'HandyME Email Confirmation',
-                    html : "Hello,<br> Please Click on the link to verify your email.<br><a href="+link+">Click here to verify</a>"
+                    html : "Hello,<br> Please Click on the link to verify your email.<br><a href="+link+">Click here to verify</a><br>Your temporary password is <h3>"+tempPass+"</h3>"
                 }
                 console.log(mailOptions);
 
@@ -125,13 +165,14 @@ Pro.findOne({email:email},(err,pro)=>
         
     }
 });
-
-
-
-
 });
 
 
-
+router.get('/logout',(req,res)=>
+{
+    req.logOut();
+    req.flash('success_msg','You are logged out');
+    res.redirect('/pro/loginPro');
+});
 
 module.exports = router;

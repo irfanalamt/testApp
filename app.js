@@ -10,8 +10,9 @@ const session = require('express-session');
 const passport = require('passport');
 const MongoStore = require('connect-mongo')(session);
 
-//model
+//models
 const User = require('./models/User');
+const Pro = require('./models/Pro');
 
 //require('./passport')(passport);
 
@@ -46,6 +47,10 @@ app.use(passport.session());
 passport.use(User.createStrategy());
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
+
+passport.use(Pro.createStrategy());
+passport.serializeUser(Pro.serializeUser());
+passport.deserializeUser(Pro.deserializeUser());
 
 //flash
 app.use(flash());
