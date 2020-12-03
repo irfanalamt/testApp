@@ -41,6 +41,31 @@ var ensureVerified=(req,res,next)=>
     });
 }
 
+router.get('/resetpw',(req,res)=>
+res.render('resetPass',{name:req.user.name}));
+
+router.post('/resetpw',(req,res)=>
+{   
+    const {pass1,pass2} = req.body;
+    console.log(`${pass1},${pass2}`);
+    //todo input validation
+    let errors = [];
+
+    Pro.findOne({email:req.user.email},(err,doc)=>
+    {   
+        if (err)
+        {   console.log("Error getting the doc for pwreset ")
+            throw err;
+        }
+
+        doc.setPassword(pass1,(err,doc)=>
+       { doc.save();}
+        );
+        
+
+    });
+});
+
 router.get('/becomePro',(req,res)=>
 {   
     

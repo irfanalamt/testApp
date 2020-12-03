@@ -23,7 +23,7 @@ router.get('/dashboard',ensureAuthenticatedUser,(req,res)=>
 router.post('/register',(req,res)=>{
     const {name,email,password,password2} = req.body;
     
-    
+    console.log(`${name},${email}`);
     let errors = [];
 
     if(!email||!password)
