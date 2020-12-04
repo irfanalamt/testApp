@@ -48,9 +48,25 @@ router.post('/resetpw',(req,res)=>
 {   
     const {pass1,pass2} = req.body;
     console.log(`${pass1},${pass2}`);
-    //todo input validation
+    
     let errors = [];
 
+    if(pass1!=pass2)
+    {   console.log('passwords dont match!');
+        errors.push({msg:'Passwords dont match.'})
+    }
+
+    if (pass1.length<6)
+    {
+        errors.push({msg:'Password should be atleast 6 characters.'});
+    }
+
+    if(errors.length>0)
+    {
+        res.render('resetPass',{name:req.user.name,errors,pass1,pass2});
+    }
+    
+    else{
     Pro.findOne({email:req.user.email},(err,doc)=>
     {   
         if (err)
@@ -59,11 +75,14 @@ router.post('/resetpw',(req,res)=>
         }
 
         doc.setPassword(pass1,(err,doc)=>
-       { doc.save();}
+       {   
+           if (err) console.log('Error in password setting.')
+           doc.save();
+        }
         );
         
 
-    });
+    }); }
 });
 
 router.get('/becomePro',(req,res)=>

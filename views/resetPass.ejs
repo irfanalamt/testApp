@@ -7,20 +7,22 @@
   </div>
 </div>
 
+<div class="container-sm ">
 <%- include('./partials/messages.ejs') %>
 
 <form method="POST" action="/pro/resetpw" class="col-4 mx-auto my-4">
 
     <div class="form-group ">
         <label for="Password1">Enter new Password:</label>
-        <input name="pass1" type="password" class="form-control" id="Password1">
+        <input name="pass1" type="password" class="form-control" id="Password1" value="<%= typeof pass1 != 'undefined' ? pass1 : '' %>">
       </div>
 
       <div class="form-group">
         <label for="Password2">Re-enter Password:</label>
-        <input name="pass2" type="password" class="form-control" id="Password2">
+        <input name="pass2" type="password" class="form-control" id="Password2" value="<%= typeof pass2 != 'undefined' ? pass2 : '' %>">
       </div>
 
       <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 
+</div>
